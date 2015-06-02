@@ -28,7 +28,8 @@ if (isset($_GET['addjoke']))
   exit();
 }
 
-/* this one seems to throw an error we can't detect
+
+/* _this one seems to throw an error we can't detect
    we could probably add a try/catch mechanism... */
 try
 {
@@ -52,70 +53,46 @@ if (!mysqli_select_db($link, 'ijdb'))
 	showError('Unable to select records');
 }
 
+if (isset($_GET['deletejoke']))
+{
+	$id = mysqli_real_escape_string($link, $_POST['id']);
+	$sql = 'DELETE FROM joke WHERE ID = ' . $id;
+	if (!mysqli_query($link, $sql))
+	{
+		showError('Error adding submitted joke: ' . mysqli_error($link));
+	}
+	header('Location: .');  
+	exit();  
+}
+
 if (isset($_POST['joketext']))
 {
+	/* add a joke */
 	$joketext = mysqli_real_escape_string($link, $_POST['joketext']);
 	$sql = 'INSERT INTO joke SET
-      joketext="' . $joketext . '",
-      jokedate=CURDATE()';
-	  if (!mysqli_query($link, $sql))
-	  {
-		$error = 'Error adding submitted joke: ' . mysqli_error($link);
-		include 'error.html.php';
-		exit();
-	  }
+	joketext="' . $joketext . '",
+	jokedate=CURDATE()';
+	if (!mysqli_query($link, $sql))
+	{
+	showError('Error adding submitted joke: ' . mysqli_error($link));
+	}
 	header('Location: .'); /* the "." means the current directory--meaning *us* */
 	exit();
 }
 
-if (false)
-{
-	$sql = 'CREATE TABLE joke2 (
-		  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-		  joketext TEXT,
-		  jokedate DATE NOT NULL
-		) DEFAULT CHARACTER SET utf8';
-	if (!mysqli_query($link, $sql))
-	{
-	  $error = 'Error creating joke table: ' . mysqli_error($link);
-	  include 'error.html.php';
-	  exit();
-	}
-
-	$output = 'Another Joke table successfully created.';
-	include 'output.html.php';
-}
-
-if (false)
-{
-	$sql = 'UPDATE joke SET jokedate="2011-07-11"
-			WHERE joketext NOT LIKE "%chicken%"';
-	if (mysqli_query($link, $sql))
-	{
-		$rows = 'Updated ' . mysqli_affected_rows($link) . ' rows.';
-	} else
-	{
-	  $error = 'Error performing update: ' . mysqli_error($link);
-	  include 'error.html.php';
-	  exit();
-	}
-}
-
-$result = mysqli_query($link, 'SELECT joketext FROM joke');
+$result = mysqli_query($link, 'SELECT id, joketext FROM joke');
 if ($result)
 {
-	/* build an output string with line breaks: */
-	$jokes = '';
+	/* build an array of jokes (so they can be displayed with buttons): */
 	while ($row = mysqli_fetch_array($result))
 	{
-	  $jokes = $jokes . $row['joketext'] . '<br>';
+		/* somehow, this adds two elements to the array  */
+		$jokes[] = array('id' => $row['id'], 'text' => $row['joketext']); 
 	}
 	include 'jokes.html.php';
 } else
 {
-  $error = 'Error fetching jokes: ' . mysqli_error($link);
-  include 'error.html.php';
-  exit();
+	showError('Error fetching jokes: ' . mysqli_error($link));
 }
 
 ?>
