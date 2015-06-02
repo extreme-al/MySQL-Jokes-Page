@@ -7,7 +7,7 @@ function showError($str)
 	exit();
 }
 
-/* this one seems to throw an error we don't detect
+/* this one seems to throw an error we can't detect
    we could probably add a try/catch mechanism... */
 $link = mysqli_connect("localhost", "joke-user", "joke-pass");
 if (!$link)
