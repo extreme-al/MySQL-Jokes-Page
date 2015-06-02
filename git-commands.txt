@@ -1,0 +1,51 @@
+20150601 Create git repo & add it to github step-by-step
+
+1.  Get your file(s) ready (remove .bak files, for instance)
+2.  Open a command window in your project directory
+3.  Enter GIT INIT
+4.  Enter GIT ADD . (the "." being short for *.*)
+5.  Enter GIT COMMIT -M "your description"
+
+Now go to Github and create a repo; see below
+
+6.  Copy URL from repo with the little button on the top-right
+7.  Enter GIT REMOTE SET-URL and paste the URL you copied above
+8.  Enter GIT PUSH ORIGIN MASTER
+8.  Git should prompt you for your user name and password.
+9.  You should see a message similar to:
+
+	Counting objects: 5, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (5/5), done.
+	Writing objects: 100% (5/5), 1.46 KiB | 0 bytes/s, done.
+	Total 5 (delta 1), reused 0 (delta 0)
+	To https://github.com/extreme-al/MySQL-Jokes-Page.git
+	 * [new branch]      master -> master
+
+10.  Go to Github and verify your files are pushed into your repo.
+
+Done!
+
+Adding/Changing Files on Github
+
+1.  Edit your file(s); also delete any .BAK file(s) 
+2.  Enter GIT ADD .
+3.  Enter GIT COMMIT -M "your description"
+
+At this point, Git already knows where your files go--which repo they're connected to, so:
+
+4.  Enter GIT PUSH ORIGIN MASTER
+5.  Git should prompt you for your user name and password.
+6.  You should see a message similar to:
+
+	Counting objects: 5, done.
+	Delta compression using up to 8 threads.
+	Compressing objects: 100% (5/5), done.
+	Writing objects: 100% (5/5), 1.46 KiB | 0 bytes/s, done.
+	Total 5 (delta 1), reused 0 (delta 0)
+	To https://github.com/extreme-al/MySQL-Jokes-Page.git
+	* [new branch]      master -> master
+
+7.  Go to Github and verify your files are pushed into your repo.
+
+Done!
