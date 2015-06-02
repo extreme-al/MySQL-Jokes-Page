@@ -16,6 +16,7 @@
 		</style>
 	</head>  
 	<body>  
+		<p><a href="?addjoke">Add your own joke</a></p>  
 		<p>Here are all the jokes in the database:</p>
 		<p class="left"><?php echo $jokes; ?></p>
 	</body>  

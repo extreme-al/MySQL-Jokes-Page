@@ -1,10 +1,31 @@
 <?php
 
+if (get_magic_quotes_gpc())
+{
+  function stripslashes_deep($value)
+  {
+    $value = is_array($value) ?
+        array_map('stripslashes_deep', $value) :
+        stripslashes($value);
+    return $value;
+  }
+  $_POST = array_map('stripslashes_deep', $_POST);
+  $_GET = array_map('stripslashes_deep', $_GET);
+  $_COOKIE = array_map('stripslashes_deep', $_COOKIE);
+  $_REQUEST = array_map('stripslashes_deep', $_REQUEST);
+}
+
 function showError($str)
 {
 	$error = $str . "; exiting";
 	include 'error.html.php';
 	exit();
+}
+
+if (isset($_GET['addjoke']))
+{
+  include 'form.html.php';
+  exit();
 }
 
 /* this one seems to throw an error we can't detect
@@ -29,6 +50,22 @@ if (!mysqli_set_charset($link, 'utf8'))
 if (!mysqli_select_db($link, 'ijdb'))
 {
 	showError('Unable to select records');
+}
+
+if (isset($_POST['joketext']))
+{
+	$joketext = mysqli_real_escape_string($link, $_POST['joketext']);
+	$sql = 'INSERT INTO joke SET
+      joketext="' . $joketext . '",
+      jokedate=CURDATE()';
+	  if (!mysqli_query($link, $sql))
+	  {
+		$error = 'Error adding submitted joke: ' . mysqli_error($link);
+		include 'error.html.php';
+		exit();
+	  }
+	header('Location: .'); /* the "." means the current directory--meaning *us* */
+	exit();
 }
 
 if (false)
