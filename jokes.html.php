@@ -26,9 +26,10 @@
 			<form action="?deletejoke" method="post">
 			<blockquote>
 				<p>
-					<?php echo htmlspecialchars($joke['text'], ENT_QUOTES,	'UTF-8'); ?>
-					<input type="hidden" name="id" value="<?php echo $joke['id']; ?>">
+					<?php echo $joke['text'] . ', by ' . $joke['name']; ?>
+					<input type="hidden" name="id" value="<?php echo $joke['joke.id']; ?>">
 					<input type="submit" value="Delete">
+					<input type="submit" value="Edit">
 				</p>
 			</blockquote>
 		<?php endforeach; ?>
