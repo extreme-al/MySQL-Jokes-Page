@@ -1,3 +1,5 @@
+some of the commands we used in the lesson
+
 ALTER TABLE ADD COLUMN authorname VARCHAR(255);
 ALTER TABLE ADD COLUMN authoremail VARCHAR(255);
 

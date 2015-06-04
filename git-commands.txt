@@ -1,4 +1,4 @@
-20150601 Create git repo & add it to github step-by-step
+20150601 Create Git (local) Repo & Add it to Github Step-by-step
 
 1.  Get your file(s) ready (remove .bak files, for instance)
 2.  Open a command window in your project directory
@@ -49,3 +49,18 @@ At this point, Git already knows where your files go--which repo they're connect
 7.  Go to Github and verify your files are pushed into your repo.
 
 Done!
+
+20150602 Delete File(s) From Github
+
+1.  Get your folder ready (remove .BAK files as always)
+2.  Make sure you have GIT INIT with no pending change; enter GIT STATUS; should get:
+
+	On branch master
+	nothing to commit, working directory clean
+
+3. 	Enter GIT RM <my file(s)>
+4.  Enter GIT COMMIT -M <my description>
+5.  Enter GIT PUSH ALL
+6.  Make sure your file is deleted from the Github repo
+
+It should be noted that "removing" it from the repo doesn't delete it from history; all you'd have to do is go back one commit and you'd get it back.
